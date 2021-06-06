@@ -105,3 +105,7 @@ dist
 
 # Package-lock.json
 package-lock.json
+
+# Log files
+ErrorLogger.txt
+RequestLogger.txt
