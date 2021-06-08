@@ -11,8 +11,11 @@ const errorLogger = require('./utilities/errorLogger');
 const dotEnv = require('dotenv');
 const envConfig = process.env.CONFIG || 'dev';
 dotEnv.config({ path: path.resolve(__dirname, `./environment/.env.${envConfig}`) });
-const createDb = require('./utilities/setupDb');
+const createDb = require('./utilities/setupdb');
 const userRouter = require('./routes/UserRouting');
+const productRouter = require('./routes/productRouting');
+const orderRouter = require('./routes/orderRouting');
+const transactionRouter = require('./routes/transactionRouting');
 
 //App configuration
 const app = express();
@@ -24,6 +27,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(requestLogger); //Request Logging
 app.use('/users', userRouter);
+app.use('/product', productRouter);
+app.use('/order', orderRouter);
+app.use('/transaction', transactionRouter);
 app.use(errorLogger); // Error Logging
 app.get('/setupdb', createDb.createTables);
 

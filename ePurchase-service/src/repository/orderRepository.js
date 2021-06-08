@@ -1,12 +1,12 @@
 const dbPool = require('../utilities/getDbPool');
 
-const userRepository ={};
+const orderRepository ={};
 
-// Create new user
-userRepository.createUser = (reqBody)=>{
-    let queryText = `INSERT INTO Users(email, user_details, user_cart, user_creds) 
-    VALUES( $1, $2, $3, $4) RETURNING user_id`;
-    let queryValue = [reqBody.email, JSON.stringify(reqBody.userDetails), JSON.stringify(reqBody.userCart), JSON.stringify(reqBody.userCreds) ];
+// Create new orders
+orderRepository.createOrder = (reqBody)=>{
+    let queryText = `INSERT INTO Orders(order_details, product_details) 
+    VALUES( $1, $2 ) RETURNING order_id`;
+    let queryValue = [ JSON.stringify(reqBody.orderDetails), JSON.stringify(reqBody.productDetails) ];
     try{
         return dbPool.query(queryText, queryValue);
     }
@@ -16,10 +16,10 @@ userRepository.createUser = (reqBody)=>{
     }
 }
 
-// Get All users
-userRepository.getAllUsers = ()=>{
+// Get All orders
+orderRepository.getAllOrders = ()=>{
     try{
-        let query = `SELECT user_id, email, user_details, user_cart FROM Users`;
+        let query = `SELECT * FROM Orders`;
         return dbPool.query(query);
     }
     catch(e){
@@ -28,10 +28,10 @@ userRepository.getAllUsers = ()=>{
     }
 }
 
-// Get user by Id
-userRepository.getUserById = (userId)=>{
-    let queryText = `SELECT user_id, email, user_details, user_cart FROM Users WHERE user_id = $1`;
-    let queryValue = [ userId ];
+// Get order by Id
+orderRepository.getOrderById = (orderId)=>{
+    let queryText = `SELECT * FROM Orders WHERE order_id = $1`;
+    let queryValue = [ orderId ];
     try{
         return dbPool.query(queryText, queryValue);
     }
@@ -41,9 +41,9 @@ userRepository.getUserById = (userId)=>{
     }
 }
 
-// Update user by Id
-userRepository.updateUserById = (userId, reqBody)=>{
-    let queryDetails = generateUpdateQuery(userId, reqBody);
+// Update order by Id
+orderRepository.updateOrderById = (orderId, reqBody)=>{
+    let queryDetails = generateUpdateQuery(orderId, reqBody);
     try{
         return dbPool.query(queryDetails[0], queryDetails[1]);
     }
@@ -53,10 +53,10 @@ userRepository.updateUserById = (userId, reqBody)=>{
     }
 }
 
-// Delete user by Id
-userRepository.deleteUserById = (userId)=>{
-    let queryText = `DELETE FROM Users WHERE user_id = $1`;
-    let queryValue = [ userId ];
+// Delete order by Id
+orderRepository.deleteOrderById = (orderId)=>{
+    let queryText = `DELETE FROM Orders WHERE order_id = $1`;
+    let queryValue = [ orderId ];
     try{
         return dbPool.query(queryText, queryValue);
     }
@@ -66,8 +66,8 @@ userRepository.deleteUserById = (userId)=>{
     }
 }
 
-function generateUpdateQuery(userId, reqBody) {
-    let queryText=`UPDATE users SET`;
+function generateUpdateQuery(orderId, reqBody) {
+    let queryText=`UPDATE Orders SET`;
     let queryValue = [];
     let index =1;
     for( var key in reqBody){
@@ -76,9 +76,9 @@ function generateUpdateQuery(userId, reqBody) {
         queryValue.push(typeof reqBody[key]=='object' ? JSON.stringify(reqBody[key]) : reqBody[key]);
         index++;
     }
-    queryText += ` WHERE user_id=$${index}`;
-    queryValue.push(userId);
+    queryText += ` WHERE order_id=$${index}`;
+    queryValue.push(orderId);
     return [ queryText, queryValue];
 }
 
-module.exports = userRepository;
+module.exports = orderRepository;

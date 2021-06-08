@@ -1,6 +1,6 @@
 const express = require('express');
 const userRouter = express.Router();
-const userCredRepository = require('../repository/UserCredRepository');
+// const userCredRepository = require('../repository/UserCredRepository');
 const userRepository = require('../repository/UserRepository');
 
 // Get all users
@@ -14,10 +14,7 @@ userRouter.get('', (req, res, next)=>{
 userRouter.post('', (req, res, next)=>{
     let reqBody = req.body;
     return userRepository.createUser(reqBody).then(userData =>{
-        console.log(userData);
-        return userCredRepository.createUserCred(reqBody, userData.rows[0].userid).then(credData =>{
-            res.json(userData.rows);
-        }).catch( err=> next(err))
+        res.json(userData.rows);
     }).catch( err=> next(err));
 });
 

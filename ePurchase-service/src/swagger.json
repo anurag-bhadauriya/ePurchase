@@ -1,211 +1,302 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "2.0.0",
-      "title": "My User Project CRUD",
-      "description": "My User Project Application API",
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
-      }
-    },
-    "host": "localhost:3000",
-    "basePath": "/",
-    "tags": [
-      {
-        "name": "Users",
-        "description": "API for users in the system"
-      }
-    ],
-    "schemes": [
-      "HTTP", "HTTPS"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "paths": {
-      "/addUser": {
-        "post": {
-          "tags": [
-            "Users"
-          ],
-          "description": "Create new user in system",
-          "parameters": [
-            {
-              "name": "user",
-              "in": "body",
-              "description": "User that we want to create",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "New user is created",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "ePurchase-API's",
+    "contact": {}
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Get All Users",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "GetAllUsers",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
-        } 
+        }
       },
-      "/list": {
-        "get": {
-            "tags": [
-              "Users"
-            ],
-            "summary": "Get all users in system",
-            "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/Users"
-                }
-              }
-            }
-          }
-      },
-      "/user/{id}": {
+      "post": {
+        "summary": "Add user",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Adduser",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
+            "name": "Body",
+            "in": "body",
             "required": true,
-            "description": "ID of user that we want to find",
-            "type": "integer"
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AdduserRequest"
+            }
           }
         ],
-        "delete": {
-          "summary": "Delete user with given ID",
-          "tags": [
-            "Users"
-          ],
-          "responses": {
-            "200": {
-              "description": "User is deleted",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
-          }
-        },
-        "put": {
-          "summary": "Update user with give ID",
-          "tags": [
-            "Users"
-          ],
-          "parameters": [
-            {
-              "name": "user",
-              "in": "body",
-              "description": "User with new values of properties",
-              "schema": {
-                "$ref": "#/definitions/updateUser"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "User is updated",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
         }
       }
     },
-    "definitions": {
-      "User": {
-        "required": [
-          "name",
-          "_id",
-          "companies"
+    "/users/8": {
+      "get": {
+        "summary": "Get User by Id",
+        "tags": [
+          "Users"
         ],
-        "properties": {
-          "_id": {
-            "type": "integer",
-            "uniqueItems": true
-          },
-          "isPublic": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "books": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "amount": {
-                    "type": "number"
-                  }
-                }
-            }
-                
-          },
-          "companies": {
-            "type": "array",
-            "items": {
-                "type": "string"      
-            }
-                
+        "operationId": "GetUserbyId",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
-         
         }
       },
-      "updateUser": {
-        "required": [
-          "name",
-          "companies"
+      "delete": {
+        "summary": "Delete User by Id",
+        "tags": [
+          "Users"
         ],
-        "properties": {
-          "isPublic": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "books": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "amount": {
-                    "type": "number"
-                  }
-                }
-            }
-                
-          },
-          "companies": {
-            "type": "array",
-            "items": {
-                "type": "string"      
-            }
-                
+        "operationId": "DeleteUserbyId",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
-         
         }
-      },
-      "Users": {
-        "type": "array",
-        "$ref": "#/definitions/User"
       }
-     
+    },
+    "/users/9": {
+      "put": {
+        "summary": "Update user by id",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Updateuserbyid",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateuserbyidRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/setupdb": {
+      "get": {
+        "summary": "Set up DB",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "SetupDB",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
     }
-  }
+  },
+  "definitions": {
+    "UpdateuserbyidRequest": {
+      "title": "UpdateuserbyidRequest",
+      "example": {
+        "firstName": "shivam100",
+        "cartDetails": [
+          {
+            "abcd": 253,
+            "klmn": 5
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "cartDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CartDetail"
+          }
+        }
+      },
+      "required": [
+        "firstName",
+        "cartDetails"
+      ]
+    },
+    "CartDetail": {
+      "title": "CartDetail",
+      "example": {
+        "abcd": 253,
+        "klmn": 5
+      },
+      "type": "object",
+      "properties": {
+        "abcd": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "klmn": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "abcd",
+        "klmn"
+      ]
+    },
+    "AdduserRequest": {
+      "title": "AdduserRequest",
+      "example": {
+        "firstName": "shivam",
+        "lastName": "singh",
+        "email": "klmn1@gmail.com",
+        "dob": "02-09-1998",
+        "phone": "2563145873",
+        "cartDetails": [
+          {
+            "klmn": 5,
+            "ijkl": 253
+          },
+          {
+            "klmn": 22,
+            "ijkl": 123
+          }
+        ],
+        "address": "Kanpur",
+        "password": "password"
+      },
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "dob": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "cartDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CartDetail1"
+          }
+        },
+        "address": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "dob",
+        "phone",
+        "cartDetails",
+        "address",
+        "password"
+      ]
+    },
+    "CartDetail1": {
+      "title": "CartDetail1",
+      "example": {
+        "klmn": 5,
+        "ijkl": 253
+      },
+      "type": "object",
+      "properties": {
+        "klmn": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ijkl": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "klmn",
+        "ijkl"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Users"
+    },
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}

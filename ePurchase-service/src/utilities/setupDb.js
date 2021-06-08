@@ -1,45 +1,33 @@
 const dbPool = require('./getDbPool');
 
-const UserDummyData = [
-    `INSERT INTO Users ( firstName, lastName, email ,dob, phone, cartDetails, address) VALUES('Anurag', 'Bhadauriya' ,'ab02091995@gmail.com', '02-Sept-1995', '8299425208', '[{"a": 1},{"b": 2}]', 'Fatehpur')`
+const usersDummyData = [
+    `INSERT INTO Users (email, user_details, user_cart, user_creds) VALUES('klmn1@gmail.com', '{"firstName": "anurag", "lastName":"bhadauriya", "dob": "02/09/1995", "phone": 8299425208, "address":"Fatehpur" ,"joinedDate": "02/19/1995"}', '[{"prodId": 121, "prodQty": 5},{"prodId": 123, "prodQty": 8}]', '{"password": "password"}')`
 ];
-const UserCreds =[];
-const Products =[];
-const Orders =[];
-const Transactions =[];
+const ProductsDummyData =[];
+const OrdersDummyData =[];
+const TransactionsDummyData =[];
 
 async function createTables(request, response){
   try{
-    let userQuery = `CREATE TABLE Users(
-        userId SERIAL PRIMARY KEY, firstName TEXT NOT NULL,
-        lastName TEXT NOT NULL, email TEXT NOT NULL UNIQUE,
-        dob TEXT, phone TEXT, cartDetails jsonb, address TEXT)`;
-    let userCredsQuery = `CREATE TABLE UserCreds(
-        credId SERIAL PRIMARY KEY, userId INTEGER NOT NULL, 
-        userMail TEXT NOT NULL UNIQUE, userPass TEXT NOT NULL,
-        CONSTRAINT fk_creds_user FOREIGN KEY(userId) REFERENCES Users(userId) ON DELETE CASCADE)`;
-    let productsQuery = `CREATE TABLE Products(
-        productId SERIAL PRIMARY KEY, productName TEXT NOT NULL, description TEXT , rating TEXT,
-        category TEXT, price INTEGER, color TEXT, image TEXT, 
-        specifications TEXT, discount TEXT, quantity INTEGER, shippingCharge INTEGER)`;
-    let ordersQuery = `CREATE TABLE Orders(
-        orderId SERIAL PRIMARY KEY, userId INTEGER NOT NULL, userEmailId TEXT NOT NULL,
-        orderAmount INTEGER NOT NULL, orderData jsonb, CONSTRAINT fk_order_user
-        FOREIGN KEY(userId) REFERENCES Users(userId))`;
-    let transactionsQuery = `CREATE TABLE Transactions(
-        transactionId SERIAL PRIMARY KEY, orderId INTEGER NOT NULL, CONSTRAINT fk_order_transaction
-        FOREIGN KEY(orderId) REFERENCES Orders(orderId))`;
-    
-    await dbPool.query(userQuery);
-    await dbPool.query(userCredsQuery);
-    await dbPool.query(productsQuery);
-    await dbPool.query(ordersQuery);
-    await dbPool.query(transactionsQuery);
-    await insertData(UserDummyData);
-    // await insertData(UserCreds);
-    // await insertData(Products);
-    // await insertData(Orders);
-    // await insertData(Transactions);
+    let createUserTableQuery = `CREATE TABLE Users(
+        user_id SERIAL PRIMARY KEY, email TEXT NOT NULL UNIQUE,
+        user_details jsonb, user_cart jsonb, user_creds jsonb
+    )`;
+    let createProductTableQuery = `CREATE TABLE Products(
+        product_id SERIAL PRIMARY KEY, product_details jsonb, seller_details jsonb
+    )`;
+    let createOrderTableQuery = `CREATE TABLE Orders(
+        order_id SERIAL PRIMARY KEY, order_details jsonb, product_ordered jsonb
+    )`;
+    let createTransactionTableQuery = `CREATE TABLE Transactions(
+        transaction_id SERIAL PRIMARY KEY, order_id INTEGER NOT NULL, 
+        CONSTRAINT fk_order_transaction FOREIGN KEY(order_id) REFERENCES Orders(order_id)
+    )`;
+    await dbPool.query(createUserTableQuery);
+    await dbPool.query(createProductTableQuery);
+    await dbPool.query(createOrderTableQuery);
+    await dbPool.query(createTransactionTableQuery);
+    await insertData(usersDummyData);
     response.send({ msg: 'Tables created successfully'});
   } catch(e) {
     let err = new Error(e);
