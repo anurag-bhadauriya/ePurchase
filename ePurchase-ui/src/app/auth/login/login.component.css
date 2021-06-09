@@ -1,0 +1,11 @@
+.login-card{
+    margin-top: 5rem !important;
+    width: fit-content;
+    min-width: 24rem;
+    max-width: 28rem;
+}
+
+.login-card-header{
+    display: flex;
+    background-color: #edf3f7;
+}

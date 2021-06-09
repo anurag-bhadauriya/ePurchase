@@ -1,1 +1,53 @@
-<p>product-list works!</p>
+<div class="product-list-container">
+
+    <div *ngIf="availableProducts !==0" id="productshow">
+        <div class="ui-md-11 point">
+            <h3 class="text-center">
+                Showing products 
+            </h3>
+            <div class="row ml-4">
+
+                <div class="card custom-card mr-3 mb-3" *ngFor="let product of productsList">
+                    <div class="d-flex">
+                        <img class="card-img-top imgStyle m-auto pt-1" src="../../assets/img/product-img/{{product.product_details.image}}" alt="{{ product.product_details.category }}">
+                    </div>
+                    <div class="card-body">
+                        <a [title]="product.product_details.name" style="cursor: pointer;" class="text-info font-weight-bold"
+                        [routerLink]="['/product/detail', product.product_id ]">
+                            {{product.product_details.name}}
+                        </a> <br>
+                        <span class="badge badge-pill badge-warning ">{{product.product_details.rating}}
+                            <span class="fa fa-star-o"></span>
+                        </span> <br>
+                        <span class="prod-description">{{product.product_details.description}}</span>
+                        <span>
+                            <h6 class="mt-2">
+                                <del class="text-secondary">
+                                    {{product.product_details.price | currency: 'INR':'symbol'}}
+                                </del> | {{product.product_details.price*(1-product.seller_details[0].discount) | currency: 'INR':'symbol'}}
+                            </h6>
+                        </span>
+                    </div>
+                    <div class="card-footer" style="padding: 0px;">
+                        <button name="product" type="button" class="btn btn-primary btn-sm btn-block" [disabled]="product.seller_details[0].quantity==0">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section *ngIf="availableProducts ===0">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div>
+                        <h3 class="h2">
+                            The product you are looking for is not available!
+                        </h3>
+                        <a href="">Go to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

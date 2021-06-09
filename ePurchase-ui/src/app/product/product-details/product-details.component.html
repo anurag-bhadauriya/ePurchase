@@ -1,1 +1,62 @@
-<p>product-details works!</p>
+<div class="product-list-container">
+
+    <div class="card product-card" *ngIf="isValidProductId && productData">
+        <div class="row">
+            <img class="card-img col-md-6" src="../assets/img/product-img/{{productData.product_details.image}}" alt="Card image">
+            <div class="col-md-6">  
+                <div class="mt-2">{{productData.product_details.category | uppercase}}</div>
+                <div>
+                    <span class="d-flex">
+                        <h3>{{productData.product_details.name}}</h3>
+                        <span class="badge badge-pill badge-warning text-light rating-badge">
+                            {{productData.product_details.rating}}
+                            <i class="fa fa-star-o"></i>
+                        </span>
+                    </span>
+                </div>
+                <h5 class="text-secondary pl-4">By Seller {{productData.seller_details[0].sellerId}}</h5>
+                <h5 class="font-weight-bold">Description:</h5>
+                <h5 class="text-secondary pl-4">{{productData.product_details.description}}</h5>
+                <h5 class="font-weight-bold">Specification:</h5>
+                <ul class="text-secondary">
+                    <li>
+                        <h5>Color: {{productData.product_details.color}}</h5>
+                    </li>
+                </ul>
+                <h5 class="font-weight-bold">Price:</h5>
+                <h5 class="text-secondary pl-4">
+                    {{productData.product_details.price*(1-productData.seller_details[0].discount) | currency: 'INR':'symbol'}} |
+                    <del>
+                        {{productData.product_details.price | currency: 'INR':'symbol'}}
+                    </del>
+                </h5>
+                <h5 class="pl-4">
+                    <span class="text-warning">{{productData.seller_details[0].discount | percent}} Off</span> +{{productData.seller_details[0].shippingCharges}} shipping charges
+                </h5>
+                <h5>
+                    <b>Quantity left: </b>{{productData.seller_details[0].quantity}}
+                </h5>
+                <div class="row mt-4">
+                    <button class="btn btn-success mr-3">Add to cart</button>
+                    <button class="btn btn-warning">Go Back</button>
+                    <span class="text-danger" *ngIf="productData.seller_details[0].quantity===0">OUT OF STOCK</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section *ngIf="!isValidProductId">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div>
+                        <h3 class="h2">
+                            The product you are looking for is not available!
+                        </h3>
+                        <a href="">Go to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

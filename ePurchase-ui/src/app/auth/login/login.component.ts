@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { paths } from '../../shared/path';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  applicationPaths: any;
+  constructor() {
+    this.applicationPaths = paths;
+  }
 
   ngOnInit(): void {
   }

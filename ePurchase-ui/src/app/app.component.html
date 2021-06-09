@@ -1,4 +1,59 @@
-Header Header
-Carousal component here
+<div class="container-fluid">
+  <!-- Nav bar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #edf3f7;">
+      <a class="navbar-brand" [routerLink]="[applicationPaths.home]">{{ title }}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Product Menu -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown menu-item" *ngFor="let item of menuItems" >
+            <a class="nav-link dropdown-toggle" [id]="item.lable" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-item-icon {{item.icon}}"></i>
+              {{ item.lable }}
+            </a>
+            <div class="dropdown-menu" *ngIf="item.categoryItems.length !== 0" attr.area-labelledby="{{item.lable}}">
+              <a class="dropdown-item" *ngFor="let subItem of item.categoryItems">{{ subItem.lable }}</a>
+            </div>
+          </li>
+        </ul>
+        <!-- Search option -->
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <!-- When userr is not logged in  -->
+        <div *ngIf="!isLoggedIn">
+          <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0 mr-2" [routerLink]="[applicationPaths.login]">Log in</button>
+          <button class="btn btn-sm btn-outline-primary my-2 my-sm-0" [routerLink]="[applicationPaths.register]">Sign up</button>
+        </div>
+        <!-- When user is logged in -->
+        <ul class="navbar-nav" *ngIf="isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/cart']" id="cart">
+                <i class="fa fa-cart-plus" style="font-size: 20px"></i>
+                <sup class="badge-dark badge-pill">0</sup>
+            </a>
+          </li>
+          <li class="nav-item dropdown menu-item">
+            <a class="nav-link dropdown-toggle" id="profileDropdown" data-toggle="dropdown">
+                <i class="fa fa-user-circle-o" style="font-size: 20px"></i>
+            </a>
+            <div class="dropdown-menu profile-menu" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">Profile</a>
+              <a class="dropdown-item">Orders</a>
+              <a class="dropdown-item">Admin</a>
+              <a class="dropdown-item">Log out</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+  </nav>
+</div>
 
-<router-outlet></router-outlet>
+<!-- <app-slideshow *ngIf="true"></app-slideshow> -->
+
+<div>
+  <router-outlet></router-outlet>
+</div>
