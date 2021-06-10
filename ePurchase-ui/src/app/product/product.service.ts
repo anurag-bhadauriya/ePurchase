@@ -21,4 +21,12 @@ export class ProductService {
     return this.http.get<any>(`${this.baseUrl}product/${productId}`);
   }
 
+  getProductByCategory(queryParams: any): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}product/search/params?category=${queryParams.category}&type=${queryParams.type}`);
+  }
+
+  addToCart(userId: number, cartItems: any[] ): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}users/${userId}/addtocart`, cartItems);
+  }
+
 }

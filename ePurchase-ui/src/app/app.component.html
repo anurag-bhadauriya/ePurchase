@@ -15,7 +15,10 @@
               {{ item.lable }}
             </a>
             <div class="dropdown-menu" *ngIf="item.categoryItems.length !== 0" attr.area-labelledby="{{item.lable}}">
-              <a class="dropdown-item" *ngFor="let subItem of item.categoryItems">{{ subItem.lable }}</a>
+              <a class="dropdown-item" *ngFor="let subItem of item.categoryItems" 
+                (click)="loadCategorySpecificProducts(item.lable, subItem.value)">
+                {{ subItem.lable }}
+              </a>
             </div>
           </li>
         </ul>
@@ -23,17 +26,17 @@
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         </form>
-        <!-- When userr is not logged in  -->
-        <div *ngIf="!isLoggedIn">
+        <!-- When user is not logged in  -->
+        <div *ngIf="!isUserLoggedIn">
           <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0 mr-2" [routerLink]="[applicationPaths.login]">Log in</button>
           <button class="btn btn-sm btn-outline-primary my-2 my-sm-0" [routerLink]="[applicationPaths.register]">Sign up</button>
         </div>
         <!-- When user is logged in -->
-        <ul class="navbar-nav" *ngIf="isLoggedIn">
+        <ul class="navbar-nav" *ngIf="isUserLoggedIn">
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/cart']" id="cart">
                 <i class="fa fa-cart-plus" style="font-size: 20px"></i>
-                <sup class="badge-dark badge-pill">0</sup>
+                <sup class="badge-dark badge-pill">{{loggedInUserData?.user_cart?.length }}</sup>
             </a>
           </li>
           <li class="nav-item dropdown menu-item">
@@ -44,7 +47,7 @@
               <a class="dropdown-item">Profile</a>
               <a class="dropdown-item">Orders</a>
               <a class="dropdown-item">Admin</a>
-              <a class="dropdown-item">Log out</a>
+              <a class="dropdown-item" (click)="logout()">Log out</a>
             </div>
           </li>
         </ul>

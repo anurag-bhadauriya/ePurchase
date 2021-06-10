@@ -66,6 +66,18 @@ userRepository.deleteUserById = (userId)=>{
     }
 }
 
+userRepository.addItemsToCart = (userId, reqBody) =>{
+    let queryText=`UPDATE users SET user_cart=$1 WHERE user_id=$2 RETURNING user_cart`;
+    let queryValue =[ JSON.stringify(reqBody) , userId];
+    try{
+        return dbPool.query(queryText, queryValue);
+    }
+    catch(e){
+        let err = new Error(e);
+        response.status(400).send({ message: err.message});
+    }
+}
+
 function generateUpdateQuery(userId, reqBody) {
     let queryText=`UPDATE users SET`;
     let queryValue = [];

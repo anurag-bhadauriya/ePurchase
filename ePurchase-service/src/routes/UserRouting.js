@@ -43,4 +43,17 @@ userRouter.delete('/:userId', (req, res, next)=>{
     }).catch(err => next(err));
 });
 
+// Add item to cart for particular user
+userRouter.post('/:userId/addtocart', (req, res, next)=>{
+    let reqBody = req.body;
+    let userId = req.params.userId;
+    return userRepository.addItemsToCart(userId, reqBody).then(userData =>{
+        if (userData.rowCount !==0 ){
+            res.json(userData.rows);
+        } else{
+            res.status(400).send({ msg: 'Cart Update failed !'});
+        }
+    }).catch( err=> next(err));
+});
+
 module.exports = userRouter;

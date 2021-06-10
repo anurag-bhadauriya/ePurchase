@@ -29,12 +29,17 @@
                         </span>
                     </div>
                     <div class="card-footer" style="padding: 0px;">
-                        <button name="product" type="button" class="btn btn-primary btn-sm btn-block" [disabled]="product.seller_details[0].quantity==0">Add to Cart</button>
+                        <button name="product" type="button" class="btn btn-primary btn-sm btn-block" 
+                        (click)="addProductToCart(product)" [disabled]="product.seller_details[0].quantity==0">
+                            Add to Cart
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <div id="snackbar">Successfully added to Cart!!</div>
 
     <section *ngIf="availableProducts ===0">
         <div class="container">

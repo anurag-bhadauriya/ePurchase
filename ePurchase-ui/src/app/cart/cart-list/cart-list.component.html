@@ -1,1 +1,72 @@
-<p>cart-list works!</p>
+<div class="cart-list-container">
+    <!-- <p *ngFor="let abc of cartData">cart-list works! {{ abc?.prodId }}</p> -->
+    <div  class="d-flex" *ngIf="cartData.length ==0">
+          <img class="empty-cart-image" src="../../assets/img/product-img/empty-cart.jpg" alt="Empty Cart">
+    </div>
+
+    <div *ngIf="cartData.length !=0 && productsData.length !=0">
+        <div class="row justify-content-md-center">
+            <div class="col-md-7 pt-2">
+                <h5 class="text-secondary ml-2">You have {{ cartData.length }} products in your Cart.</h5>
+                <div class="card shadow mt-4" *ngFor="let item of productsData;">
+                    <div class="row p-3">
+                        <div class="col-2">
+                            <img src="../../assets/img/product-img/{{ item?.product_details?.image }}" alt="not loading" width="100px" height="80px" class="img-fluid">
+                        </div>
+                        <div class="col-7">
+
+                            <h4 class="text-primary">{{ item.product_details.description |titlecase }}</h4>
+                            <p *ngIf="item?.seller_details[0]?.quantity-item?.quantity>0">{{ item.seller_details[0].quantity }} products left in stock.</p>
+                            <p class="text-danger" *ngIf="item?.seller_details[0]?.quantity-item?.quantity<1">Product not in stock </p>
+                            <h6 class="text-primary">
+                                <b class="text-secondary">Delivery Time:</b> Delivery in 7 business days.</h6>
+                            <br>
+                            <p>Quantity in cart:
+                                <i class="fa fa-minus-circle text-secondary update-quantity" (click)="updateCart(item,-1)">
+                                    &nbsp;{{ item.quantity }}</i>&nbsp;
+                                <i class="fa fa-plus-circle text-secondary update-quantity" (click)="updateCart(item,1)"></i>
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <b class="text-secondary">Discounted Price:</b>
+                            <p></p>
+                            <span><del>{{ item.product_details.price*item.quantity | currency:'INR' }}</del></span> <br>
+                            <span>{{ (1-item.seller_details[0].discount)*item.product_details.price*item.quantity | currency:'INR' }}</span>
+                            <span class="remove-btn">
+                                <button class="btn btn-sm btn-danger" (click)="removeItemFromCart(item)">
+                                <i class="fa fa-trash"></i> Remove item</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 pt-2">
+                <h5 class="text-secondary ml-2">Price Details:</h5>
+                <div class="card shadow mt-4">
+                    <div class="card-body p-2">
+                        <p>
+                            <span><b class="text-secondary">Cart Total(MRP):</b></span>
+                            <span class="float-right">{{ cartTotal | currency:'INR' }}</span>
+                        </p> <hr>
+                        <p>
+                            <span><b class="text-secondary">Total Tax(17% by default):</b></span>
+                            <span class="float-right">{{ totalTax | currency:'INR' }}</span>
+                        </p> <hr>
+                        <p>
+                            <span><b class="text-secondary">Total Payable:</b></span>
+                            <span class="float-right">{{ totalPayable | currency:'INR' }}</span>
+                        </p>
+                    </div>
+                    <div class="card-footer" style="padding: 0px;">
+                        <button class="btn btn-primary btn-sm btn-block" >
+                            Checkout now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="snackbar">Successfully updated the Cart!!</div>
+
+</div>

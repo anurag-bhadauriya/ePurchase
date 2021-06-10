@@ -25,6 +25,14 @@ productRouter.get('/:productId', (req, res, next)=>{
     }).catch(err => next(err));
 });
 
+// Get product by category
+productRouter.get('/search/params', (req, res, next)=>{
+    let queryParams = req.query;
+    return productRepository.getProductByCategory(queryParams).then(productData =>{
+        res.json(productData.rows);
+    }).catch( err => next(err));
+});
+
 // Update product by Id
 productRouter.put('/:productId', (req, res, next)=>{
     let productId = req.params.productId;

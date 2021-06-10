@@ -16,6 +16,7 @@ const userRouter = require('./routes/UserRouting');
 const productRouter = require('./routes/productRouting');
 const orderRouter = require('./routes/orderRouting');
 const transactionRouter = require('./routes/transactionRouting');
+const authRouter = require('./routes/authRouting');
 
 //App configuration
 const app = express();
@@ -26,6 +27,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(requestLogger); //Request Logging
+app.use('/auth', authRouter);
 app.use('/users', userRouter);
 app.use('/product', productRouter);
 app.use('/order', orderRouter);

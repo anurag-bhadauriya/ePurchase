@@ -41,6 +41,21 @@ productRepository.getProductById = (productId)=>{
     }
 }
 
+// Get products by category
+productRepository.getProductByCategory = (queryParams)=>{
+    let queryText = `SELECT * FROM Products WHERE
+    LOWER(product_details ->> 'category') LIKE $1 AND 
+    LOWER(product_details ->> 'description') LIKE $2`;
+    let queryValue = [ '%'+queryParams.category.toLowerCase()+'%', '%'+queryParams.type.toLowerCase()+'%' ];
+    try{
+        return dbPool.query(queryText, queryValue);
+    }
+    catch(e){
+        let err = new Error(e);
+        response.status(400).send({ message: err.message});
+    }
+}
+
 // Update product by Id
 productRepository.updateProductById = (productId, reqBody)=>{
     let queryDetails = generateUpdateQuery(productId, reqBody);
