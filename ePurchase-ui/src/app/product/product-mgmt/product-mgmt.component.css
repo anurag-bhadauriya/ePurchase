@@ -1,37 +1,13 @@
-.cart-list-container{
+.product-mgmt-container{
     margin-top: 4rem;
     max-width: 98%;
 }
 
-.empty-cart-image{
-    margin: auto;
-    height: 372px;
-    width: 430px;
-}
-
-.update-quantity{
-    font-size:21px;
-    cursor: pointer;
-}
-
-.remove-btn{
-    position: absolute;
+.add-prod-button{
+    position: fixed;
     bottom: 1rem;
-    left: 1rem;
-}
-
-.checkout-btn{
-    padding: 0.4rem;
-}
-
-.horizontal-line{
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.para-margins{
-    margin-top: 0.66rem;
-    margin-bottom: 0.66rem
+    right: 1rem;
+    border-radius: 15px;
 }
 
 #snackbar {

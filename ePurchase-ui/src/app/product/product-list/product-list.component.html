@@ -1,9 +1,10 @@
 <div class="product-list-container">
 
+    <div class="spinner-border text-muted"></div>
     <div *ngIf="availableProducts !==0" id="productshow">
         <div class="ui-md-11 point">
-            <h3 class="text-center">
-                Showing products 
+            <h3 class="text-center text-secondary pt-1 pb-2">
+                Showing Products 
             </h3>
             <div class="row ml-4">
 
@@ -41,18 +42,19 @@
     
     <div id="snackbar">Successfully added to Cart!!</div>
 
-    <section *ngIf="availableProducts ===0">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <div>
-                        <h3 class="h2">
-                            The product you are looking for is not available!
-                        </h3>
-                        <a href="">Go to Home</a>
-                    </div>
-                </div>
-            </div>
+    <div  class="d-flex flex-column" *ngIf="availableProducts===0">
+        <div class="m-auto">
+            <img src="../../../assets/img/product-img/no-results.png" alt="No Results Found">
         </div>
-    </section>
+        <div class="m-auto">
+            <h4>The product you are looking for is not available!</h4>
+        </div>
+    </div>
+
+    <ngx-spinner bdColor="rgba(0,0,0,0.7)" size="medium" color="#ffffff" type="ball-scale-multiple"
+    [fullScreen]="false">
+        <p style="font-size: 20px; color: #ffffff">
+            <b>Loading...</b>
+        </p>
+    </ngx-spinner>
 </div>

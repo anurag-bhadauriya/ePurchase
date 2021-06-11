@@ -29,4 +29,8 @@ export class ProductService {
     return this.http.post<any>(`${this.baseUrl}users/${userId}/addtocart`, cartItems);
   }
 
+  deleteProduct(productId: number): Observable<any>{
+    return this.http.delete<any>(`${this.baseUrl}product/${productId}`);
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 import { ProductService } from '../product.service';
 
@@ -16,16 +17,25 @@ export class ProductListComponent implements OnInit {
   queryParams: any;
 
   constructor(private productService: ProductService, private router: Router,
-    private sharedDataService: SharedDataService, private route: ActivatedRoute) {
-    this.getAllProducts();
+    private sharedDataService: SharedDataService, private route: ActivatedRoute,
+    private spinnerService: NgxSpinnerService) {
+    // this.getAllProducts();
     this.cartItems = sharedDataService.loggedInUserData?.user_cart;
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe( param =>{ 
       this.queryParams = param;
+      this.showSpinner();
       this.getProductsByCategory(this.queryParams);
     });
+  }
+
+  showSpinner(){
+    this.spinnerService.show();
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 700);
   }
 
   navigateToProductDetailsPage(productId: number){
@@ -53,6 +63,7 @@ export class ProductListComponent implements OnInit {
 
   addProductToCart(item: any){
     if(this.sharedDataService.isUserLoggedIn){
+      this.showSpinner();
       let itemPresentInCart: boolean = false;
       // Increase quantity of item if it is already present in cart
       for( let cartItem of this.cartItems){

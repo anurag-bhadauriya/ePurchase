@@ -8,3 +8,14 @@
 .menu-item-icon{
     font-size: 16px;
 }
+.header-logo{
+    font-family: cursive;
+    margin: auto;
+}
+.header-link{
+    display: flex;
+}
+.header-img{
+    margin: auto;
+    width: 1.3rem;
+}

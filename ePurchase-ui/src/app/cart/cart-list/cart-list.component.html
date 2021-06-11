@@ -44,20 +44,20 @@
                 <h5 class="text-secondary ml-2">Price Details:</h5>
                 <div class="card shadow mt-4">
                     <div class="card-body p-2">
-                        <p>
+                        <p class="para-margins">
                             <span><b class="text-secondary">Cart Total(MRP):</b></span>
                             <span class="float-right">{{ cartTotal | currency:'INR' }}</span>
-                        </p> <hr>
-                        <p>
+                        </p> <hr class="horizontal-line">
+                        <p class="para-margins">
                             <span><b class="text-secondary">Total Tax(17% by default):</b></span>
                             <span class="float-right">{{ totalTax | currency:'INR' }}</span>
-                        </p> <hr>
-                        <p>
+                        </p> <hr class="horizontal-line">
+                        <p class="para-margins">
                             <span><b class="text-secondary">Total Payable:</b></span>
                             <span class="float-right">{{ totalPayable | currency:'INR' }}</span>
                         </p>
                     </div>
-                    <div class="card-footer" style="padding: 0px;">
+                    <div class="card-footer checkout-btn">
                         <button class="btn btn-primary btn-sm btn-block" >
                             Checkout now
                         </button>

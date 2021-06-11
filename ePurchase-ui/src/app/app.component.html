@@ -1,7 +1,11 @@
 <div class="container-fluid">
   <!-- Nav bar -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #edf3f7;">
-      <a class="navbar-brand" [routerLink]="[applicationPaths.home]">{{ title }}</a>
+      
+      <a class="navbar-brand header-link" [routerLink]="[applicationPaths.home]">
+        <img src="../assets/img/product-img/shopping-cart.png" alt="" class="mr-2 header-img">
+        <span class="header-logo">{{ title }}</span>
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -44,9 +48,8 @@
                 <i class="fa fa-user-circle-o" style="font-size: 20px"></i>
             </a>
             <div class="dropdown-menu profile-menu" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">Profile</a>
+              <a class="dropdown-item" [routerLink]="['/product/management']">Product Management</a>
               <a class="dropdown-item">Orders</a>
-              <a class="dropdown-item">Admin</a>
               <a class="dropdown-item" (click)="logout()">Log out</a>
             </div>
           </li>
