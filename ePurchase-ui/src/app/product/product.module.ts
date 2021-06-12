@@ -6,6 +6,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ProductMgmtComponent } from './product-mgmt/product-mgmt.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +20,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   imports: [
     CommonModule,
     ProductRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class ProductModule { }

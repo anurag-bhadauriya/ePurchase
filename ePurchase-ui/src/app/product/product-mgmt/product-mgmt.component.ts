@@ -28,7 +28,6 @@ export class ProductMgmtComponent implements OnInit {
       this.productsList =data;
       this.availableProducts = data.length;
       this.createTableIterable();
-      console.log(data);
     });
   }
 
@@ -47,7 +46,6 @@ export class ProductMgmtComponent implements OnInit {
       };
       this.tableContent.data.push(prodObj);
     }
-    console.log('Tab data: ', this.tableContent);
   }
 
   deleteProduct(){

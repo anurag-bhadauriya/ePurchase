@@ -8,10 +8,11 @@
 }
 
 .imgStyle{
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    height: 154px;
-    width: 213px;
+    border-radius: 10px;
+    /* height: 154px; */
+    /* width: 213px; */
+    height: 179px;
+    width: 195px;
 }
 
 .prod-description{

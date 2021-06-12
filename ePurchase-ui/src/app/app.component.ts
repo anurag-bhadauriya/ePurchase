@@ -93,8 +93,8 @@ export class AppComponent implements OnDestroy{
         lable: 'Shoes',
         icon: 'fa fa-futbol-o',
         categoryItems: [
-          { lable: 'For Him', value: 'running men'},
-          { lable: 'For Her', value: 'running women'},
+          { lable: 'For Him', value: 'men'},
+          { lable: 'For Her', value: 'woman'},
         ] 
       },
       { 

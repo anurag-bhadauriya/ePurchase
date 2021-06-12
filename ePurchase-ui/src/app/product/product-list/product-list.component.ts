@@ -56,7 +56,11 @@ export class ProductListComponent implements OnInit {
           this.productsList = data;
           this.availableProducts = data.length;
         },
-        err => console.log(err)
+        err => {
+          this.productsList =[];
+          this.availableProducts = this.productsList.length;
+          console.log(err);
+        }
       );
     } else{ this.getAllProducts(); }
   }
