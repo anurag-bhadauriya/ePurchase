@@ -1,7 +1,7 @@
 const express = require('express');
 const userRouter = express.Router();
 // const userCredRepository = require('../repository/UserCredRepository');
-const userRepository = require('../repository/UserRepository');
+const userRepository = require('../repository/userRepository');
 
 // Get all users
 userRouter.get('', (req, res, next)=>{

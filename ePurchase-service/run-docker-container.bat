@@ -1,0 +1,1 @@
+call docker run -e CONFIG=prod -p 3000:3000 -d --name epurchase-service epurchase-service

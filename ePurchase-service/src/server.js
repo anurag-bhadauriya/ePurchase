@@ -12,7 +12,7 @@ const dotEnv = require('dotenv');
 const envConfig = process.env.CONFIG || 'dev';
 dotEnv.config({ path: path.resolve(__dirname, `./environment/.env.${envConfig}`) });
 const createDb = require('./utilities/setupdb');
-const userRouter = require('./routes/UserRouting');
+const userRouter = require('./routes/userRouting');
 const productRouter = require('./routes/productRouting');
 const orderRouter = require('./routes/orderRouting');
 const transactionRouter = require('./routes/transactionRouting');

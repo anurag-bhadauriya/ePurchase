@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serviceUrl: 'http://localhost:3000/'
+  serviceUrl: 'http://epurchase-backend:3000/'
 };
