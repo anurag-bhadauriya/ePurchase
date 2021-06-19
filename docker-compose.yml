@@ -1,0 +1,51 @@
+# Full stack dockerization
+# https://siddharth-lakhara.medium.com/dockerizing-a-full-stack-js-app-ceb99411996e
+# Run postgres & pgadmin
+# https://dev.to/shree_j/how-to-install-and-run-psql-using-docker-41j2
+
+version: "3"
+
+services:
+  
+  # Front end containers
+  frontend-service:
+    build: ./ePurchase-ui
+    ports:
+      - "4100:4100"
+    container_name: ep-ui
+    restart: always
+    links:
+      - epurchase-backend
+  
+  # Back end container
+  epurchase-backend:
+    build: ./ePurchase-service
+    ports:
+      - "3000:3000"
+    container_name: ep-service
+    restart: always
+    environment:
+      CONFIG: prod
+    links:
+      - db-service
+
+  # Postgres database container
+  db-service:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    container_name: ep-database
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  # Pg-Admin to check database
+  db-gui:
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    container_name: pg-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@domain.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    links:
+      - db-service

@@ -1,0 +1,61 @@
+<div class="product-list-container">
+
+    <!-- <div class="spinner-border text-muted"></div> -->
+    <div *ngIf="availableProducts !==0" id="productshow">
+        <div class="ui-md-11 point">
+            <h3 class="text-center text-secondary pt-1 pb-2">
+                Showing Products
+            </h3>
+            <div class="row ml-4">
+
+                <div class="card custom-card mr-3 mb-3" *ngFor="let product of productsList">
+                    <div class="d-flex">
+                        <img class="card-img-top imgStyle m-auto pt-1" src="../../assets/img/product-img/{{product.product_details.image ? product.product_details.image : 'no-image-available.jpg'}}" alt="{{ product.product_details.category }}">
+                    </div>
+                    <div class="card-body">
+                        <a [title]="product.product_details.name" style="cursor: pointer;" class="text-info font-weight-bold"
+                        [routerLink]="['/product/detail', product.product_id ]">
+                            {{product.product_details.name}}
+                        </a> <br>
+                        <span class="badge badge-pill badge-warning ">{{product.product_details.rating}}
+                            <span class="fa fa-star-o"></span>
+                        </span> <br>
+                        <span class="prod-description">{{product.product_details.description}}</span>
+                        <span>
+                            <h6 class="mt-2">
+                                <del class="text-secondary">
+                                    {{product.product_details.price | currency: 'INR':'symbol'}}
+                                </del> | {{product.product_details.price*(1-product.seller_details[0].discount) | currency: 'INR':'symbol'}}
+                            </h6>
+                        </span>
+                    </div>
+                    <div class="card-footer" style="padding: 0px;">
+                        <button name="product" type="button" class="btn btn-primary btn-sm btn-block" 
+                        (click)="addProductToCart(product)" [disabled]="product.seller_details[0].quantity==0">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="snackbar">Successfully added to Cart!!</div>
+
+    <div  class="d-flex flex-column" *ngIf="availableProducts ===0">
+        <div class="m-auto">
+            <img src="../../../assets/img/product-img/no-results.png" alt="No Results Found">
+        </div>
+        <div class="m-auto">
+            <h4>The product you are looking for is not available!</h4>
+        </div>
+    </div>
+
+    <ngx-spinner bdColor="rgba(0,0,0,0.7)" size="medium" color="#ffffff" type="ball-scale-multiple"
+    [fullScreen]="true">
+        <p style="font-size: 20px; color: #ffffff">
+            <b>Loading...</b>
+        </p>
+    </ngx-spinner>
+
+</div>

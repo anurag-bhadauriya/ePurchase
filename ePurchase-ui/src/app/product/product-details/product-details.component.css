@@ -1,0 +1,41 @@
+.product-list-container{
+    margin-top: 4rem;
+    max-width: 98%;
+}
+
+.product-card{
+    width: 95%;
+    margin: auto;
+    border: none;
+}
+.rating-badge{
+    font-size: 13px;
+    margin: auto;
+    margin-left: 1rem;
+}
+
+.no-img-available{
+    width: 77%;
+    margin: auto;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: rgb(120, 238, 159);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}

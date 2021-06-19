@@ -1,0 +1,36 @@
+.product-mgmt-container{
+    margin-top: 4rem;
+    max-width: 98%;
+}
+
+.add-prod-button{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    border-radius: 15px;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: rgb(120, 238, 159);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.table .thead-light th{
+    background-color: #edf3f7;
+}
